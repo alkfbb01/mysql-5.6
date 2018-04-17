@@ -1984,8 +1984,10 @@ limit_not_met:
       goto limit_not_met;
 
 end:
-  if (commit_rate)
-    run_query(mysql, "COMMIT", strlen("COMMIT"));
+  if (commit_rate){
+	  run_query(mysql, "COMMIT", strlen("COMMIT"));
+  }
+
 
     mysql_close(mysql);
 
