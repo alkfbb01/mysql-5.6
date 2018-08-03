@@ -2512,6 +2512,18 @@ String *Item_func_format::val_str_ascii(String *str)
       return 0; /* purecov: inspected */
     nr= my_double_round(nr, (longlong) dec, FALSE, FALSE);
     str->set_real(nr, dec, &my_charset_numeric);
+
+
+
+
+#ifndef  isinf
+#define isinf std::isinf
+#endif
+
+#ifndef  isnan
+#define isnan std::isnan
+#endif
+
     if (isnan(nr) || my_isinf(nr))
       return str;
     str_length=str->length();

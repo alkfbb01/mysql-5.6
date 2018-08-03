@@ -4492,6 +4492,9 @@ type_conversion_status Field_double::store(longlong nr, bool unsigned_val)
 
 bool Field_real::truncate(double *nr, double max_value)
 {
+#ifndef  isnan
+#define isnan std::isnan
+#endif
   if (isnan(*nr))
   {
     *nr= 0;
@@ -4517,6 +4520,11 @@ bool Field_real::truncate(double *nr, double max_value)
     max_value-= 1.0 / log_10[dec];
 
     /* Check for infinity so we don't get NaN in calculations */
+#ifndef  isinf
+#define isinf std::isinf
+#endif
+
+
     if (!my_isinf(*nr))
     {
       double tmp= rint((*nr - floor(*nr)) * log_10[dec]) / log_10[dec];
